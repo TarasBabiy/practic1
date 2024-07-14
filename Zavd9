@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int minSteps(int x, int y) {
+    if (x == y) return 0;
+
+    int dp[y + 1];
+    dp[x] = 0;
+
+    for (int i = x + 1; i <= y; ++i) {
+        dp[i] = dp[i - 1] + 1;
+        if (i % 2 == 0 && i > x) {
+            dp[i] = dp[i] < dp[i / 2] + 1 ? dp[i] : dp[i / 2] + 1;
+        }
+        if (i < y) {
+            dp[i] = dp[i] < dp[i + 1] + 1 ? dp[i] : dp[i + 1] + 1;
+        }
+    }
+
+    return dp[y];
+}
+
+int main() {
+    int x, y;
+    scanf("%d %d", &x, &y);
+    
+    int result = minSteps(x, y);
+    printf("%d\n", result);
+    
+    return 0;
+}
