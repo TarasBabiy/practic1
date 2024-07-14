@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int countEqualDivisors(int n) {
+    int count = 0;
+
+    for (int m = 2; m * m <= n; m++) {
+        if (n % m == 0) {
+            if (n / m == m) {
+                count++;
+            } else {
+                count += 2;
+            }
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    int n;
+    printf("Введіть натуральне число n (1 < n < 150): ");
+    scanf("%d", &n);
+
+    int result = countEqualDivisors(n);
+    printf("Кількість рівних дільників числа %d: %d\n", n, result);
+
+    return 0;
+}
