@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <string.h>
+
+long long fac(int n) {
+    if (n <= 1)
+        return 1;
+    return n * fac(n - 1);
+}
+
+long long countAna(char str[]) {
+    int len = strlen(str);
+    int cnt[256] = {0};
+    for (int i = 0; i < len; i++) {
+        cnt[tolower(str[i])]++;
+    }
+    
+    long long num = fac(len);
+    long long den = 1;
+    for (int i = 0; i < 256; i++) {
+        if (cnt[i] > 1) {
+            den *= fac(cnt[i]);
+        }
+    }
+    
+    return num / den;
+}
+
+int main() {
+    char str[15];
+    printf("Введіть слово: ");
+    scanf("%s", str);
+    
+    long long res = countAna(str);
+    
+    printf("Кількість анаграм: %lld\n", res);
+    
+    return 0;
+}
